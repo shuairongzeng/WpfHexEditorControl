@@ -13,7 +13,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfHexEditor.Sample.InsertByteAnywhere"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    Title="HexEditor"
+    WindowStartupLocation="CenterScreen"
     Width="800"
     Height="450"
     mc:Ignorable="d">
@@ -33,11 +35,12 @@
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            hc:BorderElement.CornerRadius="8"
+            Style="{StaticResource ButtonPrimary}"
             Click="OpenButton_Click"
             Content="Open file" />
 
         <Button
-            Width="218"
             Height="26"
             Margin="89,10,0,0"
             HorizontalAlignment="Left"

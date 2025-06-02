@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28922.388
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E7C58EBD-5476-4A12-83EB-235DE68AF079}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfHexEditor.Sample.BinaryFilesDifference", "Samples\WpfHexEditor.Sample.BinaryFilesDifference\WpfHexEditor.Sample.BinaryFilesDifference.csproj", "{2652120F-9599-44A4-95F2-CBD71F6134F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHexEditor.Sample.InsertByteAnywhere", "Samples\WpfHexEditor.Sample.InsertByteAnywhere\WpfHexEditor.Sample.InsertByteAnywhere.csproj", "{3D2FA808-7163-4103-ADBE-9912D28F7ECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDifferenceViewer", "FileDifferenceViewer\FileDifferenceViewer.csproj", "{5F2E3782-498C-492F-B9E0-B7449291E43C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,18 @@ Global
 		{3D2FA808-7163-4103-ADBE-9912D28F7ECE}.Release|x64.Build.0 = Release|Any CPU
 		{3D2FA808-7163-4103-ADBE-9912D28F7ECE}.Release|x86.ActiveCfg = Release|Any CPU
 		{3D2FA808-7163-4103-ADBE-9912D28F7ECE}.Release|x86.Build.0 = Release|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Debug|x64.Build.0 = Debug|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Debug|x86.Build.0 = Debug|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Release|x64.ActiveCfg = Release|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Release|x64.Build.0 = Release|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Release|x86.ActiveCfg = Release|Any CPU
+		{5F2E3782-498C-492F-B9E0-B7449291E43C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
