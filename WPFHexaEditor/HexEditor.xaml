@@ -234,7 +234,9 @@
                 <StatusBarItem Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <Label
-                            Width="40"
+                            Width="auto"
+                              d:Width="200"
+                             BorderThickness="0"
                             Content="{Binding Path=ZoomScale, RelativeSource={RelativeSource AncestorType={x:Type local:HexEditor}}, UpdateSourceTrigger=PropertyChanged}"
                             ContentStringFormat="P0"
                             ToolTip="{x:Static p:Resources.ZoomString}" />
@@ -246,50 +248,67 @@
                             ToolTip="{x:Static p:Resources.ZoomResetString}" />
                     </StackPanel>
                 </StatusBarItem>
-                <Separator />
-                <StatusBarItem Width="110" Padding="0">
+                <Separator />s
+                <StatusBarItem Width="auto"
+                                 d:Width="200"
+                               BorderThickness="0"
+                               Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <Label
                             Padding="5,5,0,5"
+                            Width="auto"
+                              d:Width="200"
+                            BorderThickness="0"
                             Content="{x:Static p:Resources.LineStatusBarTagString}"
                             FontWeight="Bold" />
-                        <Label Content="{Binding Path=SelectionLine, RelativeSource={RelativeSource AncestorType={x:Type local:HexEditor}}, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}" />
+                        <Label BorderThickness="0" Content="{Binding Path=SelectionLine, RelativeSource={RelativeSource AncestorType={x:Type local:HexEditor}}, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}" />
                     </StackPanel>
                 </StatusBarItem>
                 <Separator />
-                <StatusBarItem Width="125" Padding="0">
+                <StatusBarItem Width="auto" 
+                                 d:Width="200"
+                               BorderThickness="0"
+                               Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <Label
                             Padding="5,5,0,5"
+                            BorderThickness="0"
                             Content="{x:Static p:Resources.PositionString}"
                             FontWeight="Bold" />
-                        <Label Content="{Binding Path=SelectionStart, RelativeSource={RelativeSource AncestorType={x:Type local:HexEditor}}, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}" />
+                        <Label BorderThickness="0" Content="{Binding Path=SelectionStart, RelativeSource={RelativeSource AncestorType={x:Type local:HexEditor}}, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource LongHexConverter}}" />
                     </StackPanel>
                 </StatusBarItem>
                 <Separator />
-                <StatusBarItem Width="125" Padding="0">
+                <StatusBarItem Width="auto" 
+                               d:Width="200"
+                               BorderThickness="0"
+                               Padding="0">
                     <StackPanel Orientation="Horizontal">
                         <Label
+                            BorderThickness="0"
                             Padding="5,5,0,5"
                             Content="{x:Static p:Resources.LengthString}"
                             FontWeight="Bold" />
-                        <Label x:Name="FileLengthKbLabel" ContentStringFormat="N0" />
+                        <Label BorderThickness="0" x:Name="FileLengthKbLabel" ContentStringFormat="N0" />
                     </StackPanel>
                 </StatusBarItem>
                 <Separator />
                 <StatusBarItem
                     x:Name="ByteCountPanel"
+                    BorderThickness="0"
                     Padding="0"
                     Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <Label
                             Padding="5,5,0,5"
+                            BorderThickness="0"
                             Content="{x:Static p:Resources.CountOfString}"
                             FontWeight="Bold" />
-                        <Label x:Name="CountOfByteLabel" ToolTip="Byte at position start" />
-                        <Label Padding="0,5" Content=":" />
+                        <Label BorderThickness="0" x:Name="CountOfByteLabel" ToolTip="Byte at position start" />
+                        <Label BorderThickness="0" Padding="0,5" Content=":" />
                         <Label
                             x:Name="CountOfByteSumLabel"
+                            BorderThickness="0"
                             ContentStringFormat="N0"
                             ToolTip="Count of Byte at position start" />
                     </StackPanel>
