@@ -522,6 +522,18 @@ namespace WpfHexEditor.Sample.BinaryFilesDifference
         }
         #endregion
 
-    
+        private void InsertByteFirstFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            FirstFile.InsertByte((byte)0xFF, FirstFile.SelectionStart);
+            FirstFile.RefreshView();
+            ClearUI();
+        }
+
+        private void InsertByteSecondFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            SecondFile.InsertByte((byte)0xFF, SecondFile.SelectionStart);
+            SecondFile.RefreshView();
+            ClearUI();
+        }
     }
 }
