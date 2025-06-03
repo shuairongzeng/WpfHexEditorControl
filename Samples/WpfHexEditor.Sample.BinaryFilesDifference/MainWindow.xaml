@@ -13,6 +13,7 @@
     xmlns:hex="clr-namespace:WpfHexaEditor;assembly=WPFHexaEditor"
     xmlns:local="clr-namespace:WpfHexEditor.Sample.BinaryFilesDifference"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
     Title="Find the difference between two file and highlight with CustomBackGroundBlock"
     Width="826"
     Height="472"
@@ -32,37 +33,81 @@
 
 
         <Grid Grid.Row="1" Margin="5,0,5,0">
-            <hex:HexEditor
-                x:Name="FirstFile"
-                Margin="0,26,0,0"
-                AllowAutoHighLightSelectionByte="False"
-                PreloadByteInEditorMode="MaxVisibleLineExtended"
-                ReadOnlyMode="True"
-                VerticalScrollBarChanged="FirstFile_VerticalScrollBarChanged" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- For Label -->
+                <RowDefinition Height="Auto"/>
+                <!-- For Button -->
+                <RowDefinition Height="*"/>
+                <!-- For HexEditor -->
+            </Grid.RowDefinitions>
+
             <Label
+                Grid.Row="0"
                 Height="26"
                 VerticalAlignment="Top"
                 Content="{Binding FileName, ElementName=FirstFile, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                x:Name="InsertByteFirstFileButton" 
+                Grid.Row="1" 
+                Content="Insert Byte in First" 
+                Style="{StaticResource ButtonPrimary}" 
+                Click="InsertByteFirstFileButton_Click" 
+                Margin="0,2,0,2"
+                HorizontalAlignment="Left" />
+
+            <hex:HexEditor
+                x:Name="FirstFile"
+                Grid.Row="2"
+                AllowAutoHighLightSelectionByte="False"
+                PreloadByteInEditorMode="MaxVisibleLineExtended"
+                ReadOnlyMode="False"
+                CanInsertAnywhere="True"
+                VerticalScrollBarChanged="FirstFile_VerticalScrollBarChanged" />
         </Grid>
 
         <Grid
+            x:Name="SecondFilePanel"
             Grid.Row="1"
             Grid.Column="1"
             Margin="5,0,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- For Label -->
+                <RowDefinition Height="Auto"/>
+                <!-- For Button -->
+                <RowDefinition Height="*"/>
+                <!-- For HexEditor -->
+            </Grid.RowDefinitions>
+
             <Label
+                Grid.Row="0"
                 Height="26"
                 VerticalAlignment="Top"
                 Content="{Binding ElementName=SecondFile, Path=FileName, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                x:Name="InsertByteSecondFileButton" 
+                Grid.Row="1" 
+                Content="Insert Byte in Second" 
+                Style="{StaticResource ButtonPrimary}" 
+                Click="InsertByteSecondFileButton_Click" 
+                Margin="0,2,0,2"
+                HorizontalAlignment="Left" />
+
             <hex:HexEditor
                 x:Name="SecondFile"
-                Margin="0,26,0,0"
+                Grid.Row="2"
                 AllowAutoHighLightSelectionByte="False"
                 PreloadByteInEditorMode="MaxVisibleLineExtended"
-                ReadOnlyMode="True"
+                ReadOnlyMode="False"
+                CanInsertAnywhere="True"
                 VerticalScrollBarChanged="SecondFile_VerticalScrollBarChanged" />
         </Grid>
 
         <Grid
+            x:Name="DifferencesAndActionsPanel"
             Grid.Row="2"
             Grid.ColumnSpan="2"
             Margin="0,1,0,0">

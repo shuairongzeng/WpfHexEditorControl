@@ -267,7 +267,7 @@ namespace WpfHexEditor.Sample.BinaryFilesDifference
                     PatchButton.IsEnabled = true;
                     FirstFile.RefreshView();
                     SecondFile.RefreshView();
-                    PreButton.IsEnabled= true;
+                    PreButton.IsEnabled = true;
                     NextButton.IsEnabled = true;
                 });
             }
@@ -277,12 +277,12 @@ namespace WpfHexEditor.Sample.BinaryFilesDifference
             }
             finally
             {
-            //    _cts.Dispose();
-              //  _cts = null;
+                //    _cts.Dispose();
+                //  _cts = null;
             }
         }
 
-  
+
         private void FileDiffScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (_isLoading || _differences == null || _differences.Count == 0)
@@ -335,11 +335,11 @@ namespace WpfHexEditor.Sample.BinaryFilesDifference
         }
 
 
-       /// <summary>
-       /// 上一页
-       /// </summary>
-       /// <param name="sender"></param>
-       /// <param name="e"></param>
+        /// <summary>
+        /// 上一页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void PreButton_Click(object sender, RoutedEventArgs e)
         {
             index--;
@@ -357,7 +357,7 @@ namespace WpfHexEditor.Sample.BinaryFilesDifference
             await GetPageData(_differences, batchSize, progress, index, _cts.Token);
         }
 
-   
+
         private async Task ProcessDifferencesInBatches(
      List<ByteDifference> differences,
      int batchSize,
@@ -365,7 +365,7 @@ namespace WpfHexEditor.Sample.BinaryFilesDifference
      IProgress<int> progress)
         {
             var total = differences.Count;
-              batches = (int)Math.Ceiling(total / (double)batchSize);
+            batches = (int)Math.Ceiling(total / (double)batchSize);
 
             for (int i = 0; i < 1; i++)
             {
@@ -522,6 +522,18 @@ namespace WpfHexEditor.Sample.BinaryFilesDifference
         }
         #endregion
 
-    
+        private void InsertByteFirstFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            FirstFile.InsertByte((byte)0xFF, FirstFile.SelectionStart);
+            FirstFile.RefreshView();
+            ClearUI();
+        }
+
+        private void InsertByteSecondFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            SecondFile.InsertByte((byte)0xFF, SecondFile.SelectionStart);
+            SecondFile.RefreshView();
+            ClearUI();
+        }
     }
 }

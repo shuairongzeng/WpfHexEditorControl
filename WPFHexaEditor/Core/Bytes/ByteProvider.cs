@@ -873,53 +873,66 @@ namespace WpfHexaEditor.Core.Bytes
         {
             if (!CanCopy(selectionStart, selectionStop)) return;
 
+
             //Variables
             var buffer = GetCopyData(selectionStart, selectionStop, copyChange);
-            string sBuffer;
+            // sBuffer can be prepared outside if it's expensive and doesn't need UI thread
+            // For simplicity here, we'll compute it inside the dispatcher or pass buffer directly
 
-            var da = new DataObject();
-
-            switch (copypastemode)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                case CopyPasteMode.Byte:
-                    throw new NotImplementedException();
-                case CopyPasteMode.TblString when tbl is not null:
-                    sBuffer = tbl.ToTblString(buffer);
-                    da.SetText(sBuffer, TextDataFormat.Text);
-                    break;
-                case CopyPasteMode.AsciiString:
-                    sBuffer = ByteConverters.BytesToString(buffer);
-                    da.SetText(sBuffer, TextDataFormat.Text);
-                    break;
-                case CopyPasteMode.HexaString:
-                    sBuffer = ByteConverters.ByteToHex(buffer);
-                    da.SetText(sBuffer, TextDataFormat.Text);
-                    break;
-                case CopyPasteMode.CSharpCode:
-                    CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.CSharp);
-                    break;
-                case CopyPasteMode.CCode:
-                    CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.C);
-                    break;
-                case CopyPasteMode.JavaCode:
-                    CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Java);
-                    break;
-                case CopyPasteMode.FSharpCode:
-                    CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.FSharp);
-                    break;
-                case CopyPasteMode.VbNetCode:
-                    CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Vbnet);
-                    break;
-                case CopyPasteMode.PascalCode:
-                    CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Pascal);
-                    break;
-            }
+                var da = new DataObject();
+                string sBuffer_UIThread;
 
-            //set memorystream (BinaryData) clipboard data
-            using (var ms = new MemoryStream(buffer, 0, buffer.Length, false, true))
+                switch (copypastemode)
+                {
+                    case CopyPasteMode.Byte:
+                        // This case was throwing NotImplementedException. Decide how to handle.
+                        // For now, let's keep it as is or comment out if it should not throw from UI thread.
+                        throw new NotImplementedException();
+                    case CopyPasteMode.TblString when tbl is not null:
+                        sBuffer_UIThread = tbl.ToTblString(buffer);
+                        da.SetText(sBuffer_UIThread, TextDataFormat.Text);
+                        break;
+                    case CopyPasteMode.AsciiString:
+                        sBuffer_UIThread = ByteConverters.BytesToString(buffer);
+                        da.SetText(sBuffer_UIThread, TextDataFormat.Text);
+                        break;
+                    case CopyPasteMode.HexaString:
+                        sBuffer_UIThread = ByteConverters.ByteToHex(buffer);
+                        da.SetText(sBuffer_UIThread, TextDataFormat.Text);
+                        break;
+                    case CopyPasteMode.CSharpCode:
+                        // Assuming CopyToClipboard_Language populates 'da' directly.
+                        // This method itself might need to be UI-thread safe if it accesses UI elements,
+                        // or refactored to return a string/data to be set here.
+                        CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.CSharp);
+                        break;
+                    case CopyPasteMode.CCode:
+                        CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.C);
+                        break;
+                    case CopyPasteMode.JavaCode:
+                        CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Java);
+                        break;
+                    case CopyPasteMode.FSharpCode:
+                        CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.FSharp);
+                        break;
+                    case CopyPasteMode.VbNetCode:
+                        CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Vbnet);
+                        break;
+                    case CopyPasteMode.PascalCode:
+                        CopyToClipboard_Language(selectionStart, selectionStop, copyChange, da, CodeLanguage.Pascal);
+                        break;
+                }
+
+                // Handling "BinaryData" format
+                // Create the MemoryStream inside the dispatcher and do not dispose it with 'using'
+                // The clipboard API will manage the lifetime of the stream if copyGlobalData is true.
+                var ms = new MemoryStream(buffer, 0, buffer.Length, false, true);
                 da.SetData("BinaryData", ms);
 
-            Clipboard.SetDataObject(da, true);
+                Clipboard.SetDataObject(da, false); // copyGlobalData: false
+            });
 
             DataCopiedToClipboard?.Invoke(this, EventArgs.Empty);
         }
